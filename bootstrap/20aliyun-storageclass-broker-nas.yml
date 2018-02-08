@@ -1,0 +1,15 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: kafka-broker
+  namespace: default
+provisioner: alicloud/nas
+reclaimPolicy: Retain
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: kafka-zookeeper
+  namespace: default
+provisioner: alicloud/nas
+reclaimPolicy: Retain

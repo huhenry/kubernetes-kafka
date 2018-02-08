@@ -1,14 +1,14 @@
 apiVersion: apps/v1beta2
 kind: StatefulSet
 metadata:
-  name: pzoo
-  namespace: kafka
+  name: zoo
+  namespace: default
 spec:
   selector:
     matchLabels:
       app: zookeeper
       storage: persistent
-  serviceName: "pzoo"
+  serviceName: "zoo"
   replicas: 3
   updateStrategy:
     type: OnDelete
@@ -67,9 +67,10 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: data
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "kafka-zookeeper"
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: kafka-zookeeper
       resources:
         requests:
           storage: 1Gi

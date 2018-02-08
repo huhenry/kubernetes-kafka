@@ -2,7 +2,6 @@ apiVersion: apps/v1beta2
 kind: StatefulSet
 metadata:
   name: kafka
-  namespace: kafka
 spec:
   selector:
     matchLabels:
@@ -76,9 +75,10 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: data
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "kafka-broker"
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: kafka-broker
       resources:
         requests:
-          storage: 200Gi
+          storage: 30Gi
